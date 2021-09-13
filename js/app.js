@@ -10,28 +10,30 @@ loadProducts();
 
 // show all product in UI
 const showProducts = (products) => {
-  const allProducts = products.map((pd) => pd);
-  for (const product of allProducts) {
-   
-    const image = product.image;
-    const div = document.createElement("div");
-    div.classList.add("product");
-    div.innerHTML = `<div class="single-product">
-      <div>
-    <img class="product-image" src=${image}></img>
-      </div>
-      <h3 class="h4">${product.title}</h3>
-      <p>Category: ${product.category}</p>
-      <h2 class="mb-0">Price: $ ${product.price}</h2>
-      <div>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button>
-      </div>
-     </div>
-      `;
-    document.getElementById("all-products").appendChild(div);
-  }
-};
+    const allProducts = products.map((pd) => pd);
+    for (const product of allProducts) {
+      const avg_rate = product.rating.rate;
+      const rating_count = product.rating.count;
+      const image = product.image;
+      const div = document.createElement("div");
+      div.classList.add("product");
+      div.innerHTML = `<div class="single-product">
+        <div>
+      <img class="product-image" src=${image}></img>
+        </div>
+        <h3 class="h4">${product.title}</h3>
+        <p>Category: ${product.category}</p>
+        <h2 class="mb-0">Price: $ ${product.price}</h2>
+        <small class="text-warning d-block mt-0 mb-2 fw-bolder"> Avg.Rating: ${avg_rate} (${rating_count}) </small>
+        <div>
+        <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
+        <button id="details-btn" class="btn btn-danger">Details</button>
+        </div>
+       </div>
+        `;
+      document.getElementById("all-products").appendChild(div);
+    }
+  };
 
 let count = 0;
 const addToCart = (id, price) => {
